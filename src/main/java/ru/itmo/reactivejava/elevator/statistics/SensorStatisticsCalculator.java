@@ -27,7 +27,6 @@ public final class SensorStatisticsCalculator implements AutoCloseable {
         pool = new ForkJoinPool(parallelism);
     }
 
-    // Последовательный вариант служит контрольным при поиске точки равенства скоростей.
     public Map<String, SensorStatistics> sequential(List<ElevatorTelemetry> events,
                                                      long delayNanos) {
         checkDelay(delayNanos);
@@ -35,7 +34,6 @@ public final class SensorStatisticsCalculator implements AutoCloseable {
                 ElevatorTelemetry::sensorId, HashMap::new, sensorCollector(delayNanos)));
     }
 
-    // ConcurrentHashMap позволяет безопасно накапливать независимые группы сенсоров.
     public ConcurrentMap<String, SensorStatistics> parallel(List<ElevatorTelemetry> events,
                                                              long delayNanos) {
         checkDelay(delayNanos);
@@ -44,8 +42,6 @@ public final class SensorStatisticsCalculator implements AutoCloseable {
                 sensorCollector(delayNanos)));
     }
 
-    // Без задержки используем крупные части для снижения расходов на задачи.
-    // При ожидании разбиваем мельче, чтобы больше потоков могли ждать одновременно.
     public ConcurrentMap<String, SensorStatistics> forkJoin(List<ElevatorTelemetry> events,
                                                              long delayNanos) {
         checkDelay(delayNanos);

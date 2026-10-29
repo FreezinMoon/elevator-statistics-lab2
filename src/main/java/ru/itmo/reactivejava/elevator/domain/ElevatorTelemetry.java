@@ -137,7 +137,6 @@ public final class ElevatorTelemetry {
         return loadKg;
     }
 
-    // Имитирует ожидание удаленного источника перед чтением показания.
     public double loadKg(long delayNanos) {
         if (delayNanos < 0) {
             throw new IllegalArgumentException("delayNanos must not be negative");

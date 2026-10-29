@@ -28,7 +28,6 @@ public final class ElevatorTelemetryGenerator {
             }
         }
 
-        // Для каждого лифта хранится время следующего события; первым идет ближайшее.
         PriorityQueue<Source> queue = new PriorityQueue<>(
                 Comparator.comparing(source -> source.nextTime));
         for (Elevator elevator : elevators) {

@@ -44,7 +44,6 @@ public class App {
             System.out.println("Отдельных сенсоров: " + parallel.size());
             System.out.println("Все три результата совпали.");
             System.out.println("Отчёты по сенсорам: " + report.toAbsolutePath().getParent());
-            System.out.println("Замеры времени запускайте через JMH, инструкция в README.md");
         }
     }
 }
